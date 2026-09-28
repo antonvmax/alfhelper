@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.8.xsd">
+
+    <changeSet id="email_send_log" author="IaroshenkoAIu">
+        <createTable tableName="email_send_log">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="request_hash" type="TEXT"/>
+            <column name="contract_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="insert_date" type="TIMESTAMP" defaultValueComputed="CURRENT_TIMESTAMP"/>
+            <column name="last_send_date" type="TIMESTAMP" defaultValueComputed="CURRENT_TIMESTAMP"/>
+            <column name="input_data" type="JSONB"/>
+            <column name="is_retryable" type="BOOLEAN"/>
+            <column name="error" type="TEXT"/>
+            <column name="status" type="VARCHAR(50)"/>
+        </createTable>
+
+        <createIndex indexName="email_send_log_request_hash_index" tableName="email_send_log">
+            <column name="request_hash"/>
+        </createIndex>
+    </changeSet>
+
+</databaseChangeLog>

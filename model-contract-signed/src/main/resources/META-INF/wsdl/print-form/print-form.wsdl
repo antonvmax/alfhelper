@@ -1,0 +1,175 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+             xmlns:tns="http://schemas.alfastrah.ru/interplat4/ws-print-form-1.1"
+             xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+             xmlns="http://schemas.xmlsoap.org/wsdl/"
+             targetNamespace="http://schemas.alfastrah.ru/interplat4/ws-print-form-1.1"
+             name="PrintedFormsService">
+    <types>
+        <xsd:schema>
+            <xsd:import namespace="http://schemas.alfastrah.ru/interplat4/ws-print-form-1.1"
+                        schemaLocation="ws-print-form-1.1.xsd"/>
+        </xsd:schema>
+    </types>
+
+    <message name="GetPrintedForms">
+        <part name="parameters" element="tns:GetPrintedForms"/>
+    </message>
+    <message name="GetPrintedFormsResponse">
+        <part name="parameters" element="tns:GetPrintedFormsResponse"/>
+    </message>
+
+    <message name="GetPrintedFormsKasko">
+        <part name="parameters" element="tns:GetPrintedFormsKasko"/>
+    </message>
+    <message name="GetPrintedFormsKaskoResponse">
+        <part name="parameters" element="tns:GetPrintedFormsResponse"/>
+    </message>
+
+    <message name="GetPrintedFormsOsago">
+        <part name="parameters" element="tns:GetPrintedFormsOsago"/>
+    </message>
+    <message name="GetPrintedFormsOsagoResponse">
+        <part name="parameters" element="tns:GetPrintedFormsResponse"/>
+    </message>
+
+    <message name="GetPrintedFormByContractNumber">
+        <part name="parameters" element="tns:GetPrintedFormByContractNumber"/>
+    </message>
+    <message name="GetPrintedFormByContractNumberResponse">
+        <part name="parameters" element="tns:GetPrintedFormByContractNumberResponse"/>
+    </message>
+
+    <message name="GetPrintedFormByContractId">
+        <part name="parameters" element="tns:GetPrintedFormByContractId"/>
+    </message>
+    <message name="GetPrintedFormByContractIdResponse">
+        <part name="parameters" element="tns:GetPrintedFormByContractIdResponse"/>
+    </message>
+
+    <message name="GetPrintedFormsDGO">
+        <part name="parameters" element="tns:GetPrintedFormsDGO"/>
+    </message>
+    <message name="GetPrintedFormsDGOResponse">
+        <part name="parameters" element="tns:GetPrintedFormsResponse"/>
+    </message>
+
+    <message name="GetPrintedFormsGAP">
+        <part name="parameters" element="tns:GetPrintedFormsGAP"/>
+    </message>
+
+    <message name="GetPrintedFormsGAPResponse">
+        <part name="parameters" element="tns:GetPrintedFormsResponse"/>
+    </message>
+
+    <portType name="PrintFormPortType">
+        <operation name="GetPrintedForms">
+            <input message="tns:GetPrintedForms"/>
+            <output message="tns:GetPrintedFormsResponse"/>
+        </operation>
+
+        <operation name="GetPrintedFormsOsago">
+            <input message="tns:GetPrintedFormsOsago"/>
+            <output message="tns:GetPrintedFormsOsagoResponse"/>
+        </operation>
+
+        <operation name="GetPrintedFormsKasko">
+            <input message="tns:GetPrintedFormsKasko"/>
+            <output message="tns:GetPrintedFormsKaskoResponse"/>
+        </operation>
+
+        <operation name="GetPrintedFormByContractNumber">
+            <input message="tns:GetPrintedFormByContractNumber"/>
+            <output message="tns:GetPrintedFormByContractNumberResponse"/>
+        </operation>
+
+        <operation name="GetPrintedFormByContractId">
+            <input message="tns:GetPrintedFormByContractId"/>
+            <output message="tns:GetPrintedFormByContractIdResponse"/>
+        </operation>
+
+        <operation name="GetPrintedFormsDGO">
+            <input message="tns:GetPrintedFormsDGO"/>
+            <output message="tns:GetPrintedFormsDGOResponse"/>
+        </operation>
+
+        <operation name="GetPrintedFormsGAP">
+            <input message="tns:GetPrintedFormsGAP"/>
+            <output message="tns:GetPrintedFormsGAPResponse"/>
+        </operation>
+
+    </portType>
+
+    <binding name="PrintFormPortBinding" type="tns:PrintFormPortType">
+        <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+
+        <operation name="GetPrintedForms">
+            <input>
+                <soap:body use="literal"/>
+            </input>
+            <output>
+                <soap:body use="literal"/>
+            </output>
+        </operation>
+
+        <operation name="GetPrintedFormsOsago">
+            <input>
+                <soap:body use="literal"/>
+            </input>
+            <output>
+                <soap:body use="literal"/>
+            </output>
+        </operation>
+
+        <operation name="GetPrintedFormsKasko">
+            <input>
+                <soap:body use="literal"/>
+            </input>
+            <output>
+                <soap:body use="literal"/>
+            </output>
+        </operation>
+
+        <operation name="GetPrintedFormByContractNumber">
+            <input>
+                <soap:body use="literal"/>
+            </input>
+            <output>
+                <soap:body use="literal"/>
+            </output>
+        </operation>
+
+        <operation name="GetPrintedFormByContractId">
+            <input>
+                <soap:body use="literal"/>
+            </input>
+            <output>
+                <soap:body use="literal"/>
+            </output>
+        </operation>
+
+        <operation name="GetPrintedFormsDGO">
+            <input>
+                <soap:body use="literal"/>
+            </input>
+            <output>
+                <soap:body use="literal"/>
+            </output>
+        </operation>
+
+        <operation name="GetPrintedFormsGAP">
+            <input>
+                <soap:body use="literal"/>
+            </input>
+            <output>
+                <soap:body use="literal"/>
+            </output>
+        </operation>
+
+    </binding>
+    <service name="PrintedForms">
+        <port name="PrintFormPort" binding="tns:PrintFormPortBinding">
+            <soap:address location="http://z01-04117.vesta.ru:8888/PrintedForms"/>
+        </port>
+    </service>
+</definitions>

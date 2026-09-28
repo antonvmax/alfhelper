@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jaxb:bindings version="2.1"
+               jaxb:extensionBindingPrefixes="xjc"
+               xmlns:jaxb="http://java.sun.com/xml/ns/jaxb"
+               jaxb:wsdlLocation="print-form.wsdl">
+
+    <jaxb:bindings schemaLocation="ws-print-form-1.1.xsd" node=".">
+        <jaxb:schemaBindings>
+            <jaxb:package name="ru.alfastrah.interplat4.model.print.form"/>
+        </jaxb:schemaBindings>
+
+    </jaxb:bindings>
+
+</jaxb:bindings>

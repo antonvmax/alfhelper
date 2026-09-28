@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+    <springProperty name="service.name" source="spring.application.name" scope="context"/>
+    <property resource="application-default.properties"/>
+
+    <springProfile name="local,default">
+        <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+            <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+                <charset>UTF-8</charset>
+                <Pattern>
+                    %d{yyyy-MM-dd HH:mm:ss a, Europe/Moscow} [%t] %-5level %logger{36} - %msg%n
+                </Pattern>
+            </encoder>
+        </appender>
+        <logger name="ru.alfastrah" level="TRACE" additivity="false">
+            <appender-ref ref="STDOUT"/>
+        </logger>
+        <root level="info">
+            <appender-ref ref="STDOUT"/>
+        </root>
+    </springProfile>
+    <springProfile name="test">
+        <appender name="STASH" class="net.logstash.logback.appender.LogstashTcpSocketAppender">
+            <destination>z14-1079-elk.vesta.ru:5044</destination>
+            <secondaryConnectionTTL>5 minutes</secondaryConnectionTTL>
+            <encoder class="net.logstash.logback.encoder.LogstashEncoder"/>
+        </appender>
+        <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+            <encoder class="net.logstash.logback.encoder.LogstashEncoder"/>
+        </appender>
+    </springProfile>
+    <springProfile name="dev">
+        <appender name="STASH" class="net.logstash.logback.appender.LogstashTcpSocketAppender">
+            <destination>z14-1079-elk.vesta.ru:5044</destination>
+            <secondaryConnectionTTL>5 minutes</secondaryConnectionTTL>
+            <encoder class="net.logstash.logback.encoder.LogstashEncoder"/>
+        </appender>
+        <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+            <encoder class="net.logstash.logback.encoder.LogstashEncoder"/>
+        </appender>
+    </springProfile>
+    <springProfile name="prod">
+        <appender name="STASH" class="net.logstash.logback.appender.LogstashTcpSocketAppender">
+            <destination>z14-1801-elk1.vesta.ru:5044</destination>
+            <secondaryConnectionTTL>5 minutes</secondaryConnectionTTL>
+            <encoder class="net.logstash.logback.encoder.LogstashEncoder"/>
+        </appender>
+        <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+            <encoder class="net.logstash.logback.encoder.LogstashEncoder"/>
+        </appender>
+    </springProfile>
+
+    <logger name="ru.alfastrah" level="info" additivity="false">
+        <appender-ref ref="STASH" />
+        <appender-ref ref="STDOUT"/>
+    </logger>
+
+
+    <root level="error">
+        <appender-ref ref="STASH" />
+        <appender-ref ref="STDOUT"/>
+    </root>
+
+</configuration>

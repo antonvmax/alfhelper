@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           targetNamespace="http://schemas.alfastrah.ru/interplat4/send-contract-signed"
+           xmlns="http://schemas.alfastrah.ru/interplat4/send-contract-signed"
+           xmlns:xmime="http://www.w3.org/2005/05/xmlmime">
+
+    <xs:element name="SendContractSignedRequest" type="SendContractSignedRequest">
+        <xs:annotation>
+            <xs:documentation>Запрос на отправку подписанного договора по почте</xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <xs:element name="SendContractSignedResponse" type="SendContractSignedResponse">
+        <xs:annotation>
+            <xs:documentation>Ответ по отправке подписанного договора по почте</xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <xs:element name="GetContractSignedRequest" type="GetContractSignedRequestType">
+        <xs:annotation>
+            <xs:documentation>Запрос на отправку подписанного договора по почте</xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <xs:element name="GetAnyContractSignedRequest" type="GetAnyContractSignedRequestType">
+        <xs:annotation>
+            <xs:documentation>Запрос на отправку подписанного договора по почте</xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <xs:element name="GetContractSignedResponse" type="GetContractSignedResponseType">
+        <xs:annotation>
+            <xs:documentation>Ответ по отправке подписанного договора по почте</xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <xs:element name="SendContractSignedException" type="SendContractSignedException"/>
+    <xs:complexType name="GetContractSignedRequestType">
+        <xs:sequence>
+            <xs:annotation>
+                <xs:documentation>Договор для подписи</xs:documentation>
+            </xs:annotation>
+            <xs:element minOccurs="1" name="UPID" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation>Универсальный идентификатор партнера</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element minOccurs="1" name="ContractId" type="xs:integer">
+                <xs:annotation>
+                    <xs:documentation>Идентификатор договора в Юникус</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="GetAnyContractSignedRequestType">
+        <xs:sequence>
+            <xs:annotation>
+                <xs:documentation>Договор для подписи</xs:documentation>
+            </xs:annotation>
+            <xs:element minOccurs="1" name="ContractId" type="xs:integer">
+                <xs:annotation>
+                    <xs:documentation>Идентификатор договора в Юникус</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="PrintedFormId" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation>Идентификатор печатной формы</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element minOccurs="0" name="Params" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation>Дополнительные параметры запроса</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element minOccurs="1" name="signature" type="typeSignature">
+                <xs:annotation>
+                    <xs:documentation>Указатель на подпись, которую надо поставить на документе</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:simpleType name="typeSignature">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="Горин А.Э."/>
+            <xs:enumeration value="Стяблина Д.С."/>
+            <xs:enumeration value="Туркина Д.Б."/>
+            <xs:enumeration value="Греченков Л.Н."/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:complexType name="GetContractSignedResponseType">
+        <xs:sequence>
+            <xs:element name="PrintedFormId" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation>Идентификатор печатной формы</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="MIME" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation>Internet media type, например: application/pdf
+                        http://en.wikipedia.org/wiki/Internet_media_type
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="Content" type="xs:base64Binary"
+                        xmime:expectedContentTypes="application/octet-stream,application/pdf">
+                <xs:annotation>
+                    <xs:documentation>Содержимое в виде массива байтов</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="SendContractSignedRequest">
+        <xs:sequence>
+            <xs:annotation>
+                <xs:documentation>Договор для подписи</xs:documentation>
+            </xs:annotation>
+            <xs:element minOccurs="1" name="ContractId" type="xs:integer">
+                <xs:annotation>
+                    <xs:documentation>Идентификатор договора в Юникус</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="PrintedFormId" type="xs:string"/>
+            <xs:element name="Email" type="xs:string"/>
+            <xs:element name="Subject" type="xs:string" minOccurs="0"/>
+            <xs:element name="Recurrent" type="xs:boolean" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="SendContractSignedResponse">
+        <xs:annotation>
+            <xs:documentation>Результат обработки сообщения</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="Result" type="xs:boolean">
+                <xs:annotation>
+                    <xs:documentation>Результат обработки сообщения</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="SendContractSignedException">
+        <xs:annotation>
+            <xs:documentation>Сообщение об ошибке</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element maxOccurs="1" minOccurs="0" name="ErrorCode" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation>Код ошибки</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element minOccurs="0" name="ErrorMessage" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation>Информация об ошибке</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+</xs:schema>

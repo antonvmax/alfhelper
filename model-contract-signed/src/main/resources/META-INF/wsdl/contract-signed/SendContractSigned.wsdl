@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+             xmlns:tns="http://schemas.alfastrah.ru/interplat4/send-contract-signed"
+             xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+             xmlns="http://schemas.xmlsoap.org/wsdl/"
+             targetNamespace="http://schemas.alfastrah.ru/interplat4/send-contract-signed"
+             name="RSENDCONTRACTSIGNEDService">
+    <types>
+        <xsd:schema>
+            <xsd:import namespace="http://schemas.alfastrah.ru/interplat4/send-contract-signed"
+                        schemaLocation="SendContractSigned.xsd"/>
+        </xsd:schema>
+    </types>
+
+    <message name="SendContractSignedRequest">
+        <part name="parameters" element="tns:SendContractSignedRequest"/>
+    </message>
+
+    <message name="SendContractSignedResponse">
+        <part name="parameters" element="tns:SendContractSignedResponse"/>
+    </message>
+
+    <portType name="sendContractSignedPortType">
+        <operation name="SendContractSigned">
+            <input message="tns:SendContractSignedRequest"/>
+            <output message="tns:SendContractSignedResponse"/>
+        </operation>
+    </portType>
+
+    <binding name="sendContractSignedBinding" type="tns:sendContractSignedPortType">
+        <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+
+        <operation name="SendContractSigned">
+            <soap:operation soapAction=""/>
+            <input>
+                <soap:body use="literal"/>
+            </input>
+            <output>
+                <soap:body use="literal"/>
+            </output>
+        </operation>
+    </binding>
+    
+    <service name="sendContractSignedService">
+        <port name="sendContractSignedPort" binding="tns:sendContractSignedBinding">
+            <soap:address location=""/>
+        </port>
+    </service>
+</definitions>

@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified"
+           targetNamespace="http://schemas.alfastrah.ru/interplat4/ws-print-form-1.1"
+           xmlns="http://schemas.alfastrah.ru/interplat4/ws-print-form-1.1"
+           xmlns:xmime="http://www.w3.org/2005/05/xmlmime">
+    <xs:element name="GetPrintedForms">
+        <xs:annotation>
+            <xs:documentation>Список печатных форм доступных для страхового продукта</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" name="ContractID" type="xs:integer"/>
+                <xs:element name="ProductID" type="xs:string" maxOccurs="1" minOccurs="0">
+                    <xs:annotation>
+                        <xs:documentation>Идентификатор страхового продукта</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="GetPrintedFormsResponse">
+        <xs:annotation>
+            <xs:documentation>Список доступных печатных форм</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element maxOccurs="unbounded" minOccurs="0" name="PrintedForm"
+                            type="PrintedForm">
+                    <xs:annotation>
+                        <xs:documentation>Печатная форма</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="GetPrintedFormsKasko">
+        <xs:annotation>
+            <xs:documentation>Список печатных форм КАСКО доступных для конкретного договора</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element maxOccurs="1" minOccurs="0" name="ContractId" type="xs:integer">
+                    <xs:annotation>
+                        <xs:documentation>Id договора для вывода на мечать</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" name="ContractNumber" type="xs:string">
+                    <xs:annotation>
+                        <xs:documentation>Номер договора для вывода на печать.</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="GetPrintedFormsDGO">
+        <xs:annotation>
+            <xs:documentation>Список печатных форм ДГО доступных для конкретного договора</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element maxOccurs="1" minOccurs="0" name="ContractId" type="xs:integer">
+                    <xs:annotation>
+                        <xs:documentation>Id договора для вывода на печать</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" name="ContractNumber" type="xs:string">
+                    <xs:annotation>
+                        <xs:documentation>Номер договора для вывода на печать.</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="GetPrintedFormsGAP">
+        <xs:annotation>
+            <xs:documentation>Список печатных форм ДГО доступных для конкретного договора</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element maxOccurs="1" minOccurs="0" name="ContractId" type="xs:integer">
+                    <xs:annotation>
+                        <xs:documentation>Id договора для вывода на печать</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" name="ContractNumber" type="xs:string">
+                    <xs:annotation>
+                        <xs:documentation>Номер договора для вывода на печать.</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="GetPrintedFormsOsago">
+        <xs:annotation>
+            <xs:documentation>Список печатных форм ОСАГО доступных для конкретного договора</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="ContractId" type="xs:integer" minOccurs="0">
+                    <xs:annotation>
+                        <xs:documentation>Идентификатор договора</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element name="ContractSeria" type="xs:string">
+                    <xs:annotation>
+                        <xs:documentation>Серия договора</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element name="ContractNumber" type="xs:string">
+                    <xs:annotation>
+                        <xs:documentation>Номер договора</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="GetPrintedFormByContractNumber">
+        <xs:annotation>
+            <xs:documentation>Получение печатной формы по номеру договора</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" name="ContractSeria" type="xs:string">
+                    <xs:annotation>
+                        <xs:documentation>Серия договора</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element name="ContractNumber" type="xs:string">
+                    <xs:annotation>
+                        <xs:documentation>Номер договора</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element name="PrintedFormId" type="xs:string">
+                    <xs:annotation>
+                        <xs:documentation>Идентификатор печатной формы</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" name="Params" type="xs:string">
+                    <xs:annotation>
+                        <xs:documentation>Дополнительные параметры запроса</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="GetPrintedFormByContractNumberResponse" type="ResponseType"/>
+    <xs:element name="GetPrintedFormByContractId">
+        <xs:annotation>
+            <xs:documentation>Получение печатной формы по идентификатору договора</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="ContractId" type="xs:integer">
+                    <xs:annotation>
+                        <xs:documentation>Идентификатор договора</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element name="PrintedFormId" type="xs:string">
+                    <xs:annotation>
+                        <xs:documentation>Идентификатор печатной формы</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" name="Params" type="xs:string">
+                    <xs:annotation>
+                        <xs:documentation>Дополнительные параметры запроса</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="GetPrintedFormByContractIdResponse" type="ResponseType"/>
+    <xs:complexType name="ResponseType">
+        <xs:sequence>
+            <xs:element name="PrintedFormId" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation>Идентификатор печатной формы</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="MIME" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation>Internet media type, например: application/pdf
+                        http://en.wikipedia.org/wiki/Internet_media_type
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="Content" type="xs:base64Binary"
+                        xmime:expectedContentTypes="application/octet-stream,application/pdf">
+                <xs:annotation>
+                    <xs:documentation>Содержимое в виде массива байтов</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="PrintedForm">
+        <xs:annotation>
+            <xs:documentation>Печатная форма</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="PrintedFormId" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation>Идентификатор печатной формы</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="PrintedFormName" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation>Название печатной формы</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+</xs:schema>

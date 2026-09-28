@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
+
+    <changeSet id="Create table product_policy_signature_params" author="KorovinAS">
+        <preConditions onError="MARK_RAN" onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="product_policy_signature_params" schemaName="public"/>
+            </not>
+        </preConditions>
+        <comment>Create table product_policy_signature_params</comment>
+        <createTable tableName="product_policy_signature_params" schemaName="public">
+
+            <column name="id" type="bigserial" autoIncrement="true" remarks="id">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+
+            <column name="product_id" type="varchar" remarks="product_id">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="form_id" type="varchar" remarks="form_id">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="llx" type="int4" remarks="llx">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="lly" type="int4" remarks="lly">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="urx" type="int4" remarks="urx">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="ury" type="int4" remarks="ury">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="font_size" type="int4" remarks="font_size">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="page" type="int4" remarks="page">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="is_stamp_visible" type="bool" remarks="is_stamp_visible">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="Insert data into product_policy_signature_params" author="KorovinAS">
+        <comment>Insert initial data into product_policy_signature_params</comment>
+
+        <insert tableName="product_policy_signature_params" schemaName="public">
+            <column name="product_id" value="OSAGO"/>
+            <column name="form_id" value="526"/>
+            <column name="llx" valueNumeric="280"/>
+            <column name="lly" valueNumeric="25"/>
+            <column name="urx" valueNumeric="640"/>
+            <column name="ury" valueNumeric="70"/>
+            <column name="font_size" valueNumeric="7"/>
+            <column name="page" valueNumeric="1"/>
+            <column name="is_stamp_visible" value="true"/>
+        </insert>
+        <insert tableName="product_policy_signature_params" schemaName="public">
+            <column name="product_id" value="OSAGO"/>
+            <column name="form_id" value="525"/>
+            <column name="llx" valueNumeric="280"/>
+            <column name="lly" valueNumeric="25"/>
+            <column name="urx" valueNumeric="640"/>
+            <column name="ury" valueNumeric="70"/>
+            <column name="font_size" valueNumeric="7"/>
+            <column name="page" valueNumeric="1"/>
+            <column name="is_stamp_visible" value="true"/>
+        </insert>
+
+        <insert tableName="product_policy_signature_params" schemaName="public">
+            <column name="product_id" value="OSAGO"/>
+            <column name="form_id" value="716"/>
+            <column name="llx" valueNumeric="185"/>
+            <column name="lly" valueNumeric="0"/>
+            <column name="urx" valueNumeric="530"/>
+            <column name="ury" valueNumeric="95"/>
+            <column name="font_size" valueNumeric="7"/>
+            <column name="page" valueNumeric="2"/>
+            <column name="is_stamp_visible" value="true"/>
+        </insert>
+
+        <insert tableName="product_policy_signature_params" schemaName="public">
+            <column name="product_id" value="OSAGO"/>
+            <column name="form_id" value="526"/>
+            <column name="llx" valueNumeric="230"/>
+            <column name="lly" valueNumeric="450"/>
+            <column name="urx" valueNumeric="580"/>
+            <column name="ury" valueNumeric="495"/>
+            <column name="font_size" valueNumeric="7"/>
+            <column name="page" valueNumeric="3"/>
+            <column name="is_stamp_visible" value="true"/>
+        </insert>
+
+        <insert tableName="product_policy_signature_params" schemaName="public">
+            <column name="product_id" value="OSAGO"/>
+            <column name="form_id" value="1492"/>
+            <column name="llx" valueNumeric="0"/>
+            <column name="lly" valueNumeric="0"/>
+            <column name="urx" valueNumeric="0"/>
+            <column name="ury" valueNumeric="0"/>
+            <column name="font_size" valueNumeric="7"/>
+            <column name="page" valueNumeric="0"/>
+            <column name="is_stamp_visible" value="false"/>
+        </insert>
+
+        <insert tableName="product_policy_signature_params" schemaName="public">
+            <column name="product_id" value="OSAGO"/>
+            <column name="form_id" value="917"/>
+            <column name="llx" valueNumeric="370"/>
+            <column name="lly" valueNumeric="85"/>
+            <column name="urx" valueNumeric="560"/>
+            <column name="ury" valueNumeric="145"/>
+            <column name="font_size" valueNumeric="7"/>
+            <column name="page" valueNumeric="1"/>
+            <column name="is_stamp_visible" value="true"/>
+        </insert>
+
+    </changeSet>
+</databaseChangeLog>
