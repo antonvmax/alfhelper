@@ -15,6 +15,7 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.ArgumentMatchers.nullable;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -106,7 +107,9 @@ class SearchByUpidAndContractServiceTest {
 
     @Test
     void searchByUpidAndContractId_withNullParameters_shouldFallbackToOracle() {
-        when(partnersPakDLO.searchByUpidAndContractId(any(), any()))
+        when(partnersPostgresService.searchByUpidAndContractId(any(UUID.class), nullable(Long.class)))
+                .thenReturn(null);
+        when(partnersPakDLO.searchByUpidAndContractId(any(), nullable(Long.class)))
                 .thenReturn(ORA_RESULT);
 
         SoftAssertions softy = new SoftAssertions();
