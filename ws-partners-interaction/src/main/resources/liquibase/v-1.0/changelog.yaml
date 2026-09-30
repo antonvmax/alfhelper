@@ -1,0 +1,10 @@
+databaseChangeLog:
+  - include:
+      file: create-schema-partners_interaction.yaml
+      relativeToChangelogFile: 'true'
+  - include:
+      file: create-table-partner_identifiers.yaml
+      relativeToChangelogFile: 'true'
+  - include:
+      file: create-table-partner_calculation.yaml
+      relativeToChangelogFile: 'true'
