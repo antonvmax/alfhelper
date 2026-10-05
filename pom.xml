@@ -30,6 +30,7 @@
 	<modules>
 		<module>main</module>
 		<module>mod1</module>
+		<module>payment-cheque</module>
 	</modules>
 	<properties>
 		<java.version>21</java.version>
