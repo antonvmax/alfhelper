@@ -5,11 +5,11 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 import ru.alfastrah.site.avto.payment.cheque.client.internet.contract.InternetContractFeignClient;
+import ru.alfastrah.site.avto.payment.cheque.client.partners.interaction.PartnersInteractionClient;
 import ru.alfastrah.site.avto.payment.cheque.client.payment.methods.PaymentMethodsFeignClient;
 import ru.alfastrah.site.avto.payment.cheque.exception.ReceivingChequeException;
 import ru.alfastrah.site.avto.payment.cheque.model.ChequeResponse;
 import ru.alfastrah.site.avto.payment.cheque.model.unicus.InternetContractPayment;
-import ru.alfastrah.site.avto.payment.cheque.repositories.PartnerCalculationRepository;
 
 import java.util.Optional;
 
@@ -17,7 +17,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 @Slf4j
 public class PaymentChequeService {
-    private final PartnerCalculationRepository repository;
+    private final PartnersInteractionClient partnersInteractionClient;
     private final CheckRealContractService checkRealContractService;
     private final InternetContractFeignClient internetContractFeignClient;
     private final PaymentMethodsFeignClient paymentMethodsFeignClient;
@@ -47,7 +47,8 @@ public class PaymentChequeService {
     }
 
     private void checkAssociatedUpidWithContract(String upid, String contractId) {
-        if (!repository.isAssociatedUpidWithContract(upid, contractId)) {
+        Long contractIdLong = Long.parseLong(contractId);
+        if (partnersInteractionClient.searchByUpidAndContractId(upid, contractIdLong) == null) {
             String message = String.format("К UPID %s не привязан контракт %s", upid, contractId);
             throw new ReceivingChequeException(message);
         }

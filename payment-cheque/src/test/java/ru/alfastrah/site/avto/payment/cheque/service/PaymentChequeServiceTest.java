@@ -7,9 +7,9 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import ru.alfastrah.site.avto.payment.cheque.client.internet.contract.InternetContractFeignClient;
+import ru.alfastrah.site.avto.payment.cheque.client.partners.interaction.PartnersInteractionClient;
 import ru.alfastrah.site.avto.payment.cheque.client.payment.methods.PaymentMethodsFeignClient;
 import ru.alfastrah.site.avto.payment.cheque.model.unicus.InternetContractPayment;
-import ru.alfastrah.site.avto.payment.cheque.repositories.PartnerCalculationRepository;
 
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.*;
@@ -23,7 +23,7 @@ class PaymentChequeServiceTest {
     @Autowired
     PaymentChequeService service;
     @MockBean
-    PartnerCalculationRepository partnerCalculationRepository;
+    PartnersInteractionClient partnersInteractionClient;
     @MockBean
     CheckRealContractService checkRealContractService;
     @MockBean
@@ -41,7 +41,7 @@ class PaymentChequeServiceTest {
     @Test
     void throwExceptionMdOrderNotFoundWhenInternetContractClientReturnEmptyResultByContractId() {
         when(internetContractFeignClient.getPaymentDictByContractId(anyString())).thenReturn(new InternetContractPayment());
-        when(partnerCalculationRepository.isAssociatedUpidWithContract(anyString(), anyString())).thenReturn(true);
+        when(partnersInteractionClient.searchByUpidAndContractId(anyString(), any())).thenReturn(123L);
 
         assertThatThrownBy(() -> service.getChequeInfo("123", "123", null)).hasMessageContaining("Указан несуществующий mdorder");
     }
@@ -49,7 +49,7 @@ class PaymentChequeServiceTest {
     @Test
     void throwExceptionMdOrderNotAssociatedWithContract() {
         when(internetContractFeignClient.getPaymentDictByContractId(anyString())).thenReturn(new InternetContractPayment());
-        when(partnerCalculationRepository.isAssociatedUpidWithContract(anyString(), anyString())).thenReturn(false);
+        when(partnersInteractionClient.searchByUpidAndContractId(anyString(), any())).thenReturn(null);
 
         assertThatThrownBy(() -> service.getChequeInfo("1234", "123", null)).hasMessageContaining("К UPID 1234 не привязан контракт 123");
     }
@@ -62,7 +62,7 @@ class PaymentChequeServiceTest {
 
         when(checkRealContractService.isRealContract(anyString())).thenReturn("123");
         when(internetContractFeignClient.getPaymentDictByContractId(anyString())).thenReturn(internetContractPayment);
-        when(partnerCalculationRepository.isAssociatedUpidWithContract(anyString(), anyString())).thenReturn(true);
+        when(partnersInteractionClient.searchByUpidAndContractId(anyString(), any())).thenReturn(123L);
 
         assertDoesNotThrow(() -> service.getChequeInfo("1234", "-123", null));
     }
@@ -75,7 +75,7 @@ class PaymentChequeServiceTest {
 
         when(checkRealContractService.isRealContract(anyString())).thenReturn("123");
         when(internetContractFeignClient.getPaymentDictByContractId(anyString())).thenReturn(internetContractPayment);
-        when(partnerCalculationRepository.isAssociatedUpidWithContract(anyString(), anyString())).thenReturn(true);
+        when(partnersInteractionClient.searchByUpidAndContractId(anyString(), any())).thenReturn(123L);
         when(paymentMethodsFeignClient.getCheque(anyString(), anyString())).thenThrow(new RuntimeException("Ошибка при вызове сервиса paymentMethods"));
 
         assertThatThrownBy(() -> service.getChequeInfo("1234", "-123", null)).hasMessageContaining("Ошибка при вызове сервиса paymentMethods");
