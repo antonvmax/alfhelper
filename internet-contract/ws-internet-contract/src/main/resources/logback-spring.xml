@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <springProperty  name="service.name" source="spring.application.name" scope="context"/>
+
+    <springProfile name="default">
+        <property resource="application-default.properties" />
+        <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+            <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+                <charset>UTF-8</charset>
+                <Pattern>
+                    %d{yyyy-MM-dd HH:mm:ss a, Europe/Moscow} [%t] %-5level %logger{36} - %msg%n
+                </Pattern>
+            </encoder>
+        </appender>
+        <logger name="ru.alfastrah" level="TRACE" additivity="false">
+            <appender-ref ref="STDOUT"/>
+        </logger>
+        <root level="INFO">
+            <appender-ref ref="STDOUT"/>
+        </root>
+    </springProfile>
+
+    <springProfile name="test">
+        <property resource="application-test.properties" />
+        <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+            <encoder class="net.logstash.logback.encoder.LogstashEncoder"/>
+        </appender>
+        <logger name="ru.alfastrah" level="INFO" additivity="false">
+            <appender-ref ref="STDOUT"/>
+        </logger>
+        <root level="ERROR">
+            <appender-ref ref="STDOUT"/>
+        </root>
+    </springProfile>
+
+    <springProfile name="prod">
+        <property resource="application-prod.properties" />
+        <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+            <encoder class="net.logstash.logback.encoder.LogstashEncoder"/>
+        </appender>
+        <logger name="ru.alfastrah" level="INFO" additivity="false">
+            <appender-ref ref="STDOUT"/>
+        </logger>
+        <root level="ERROR">
+            <appender-ref ref="STDOUT"/>
+        </root>
+    </springProfile>
+</configuration>

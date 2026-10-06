@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>3.2.10</version>
+        <relativePath />
+    </parent>
+
+    <modules>
+        <module>ws-internet-contract</module>
+        <module>model-internet-contract</module>
+        <module>client-internet-contract</module>
+    </modules>
+
+    <groupId>ru.alfastrah.site.avto.payment.internet.contract</groupId>
+    <artifactId>internet-contract</artifactId>
+    <version>3.0.10</version>
+    <packaging>pom</packaging>
+    <name>internet-contract</name>
+
+    <properties>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
+        <jacoco.mvn.plugin.version>0.8.8</jacoco.mvn.plugin.version>
+        <sonar-maven-plugin.version>3.7.0.1746</sonar-maven-plugin.version>
+        <sonar.coverage.exclusions>**/controller/**, **/config/**, **/dto/**, **/entity/**</sonar.coverage.exclusions>
+    </properties>
+
+    <scm>
+        <connection>scm:git:ssh://gitlab.alfastrah.ru:adt-avto/internet-contract.git</connection>
+        <developerConnection>scm:git:ssh://gitlab.alfastrah.ru:adt-avto/internet-contract.git</developerConnection>
+        <url>https://gitlab.alfastrah.ru/adt-avto/internet-contract</url>
+    </scm>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.micrometer</groupId>
+            <artifactId>micrometer-tracing-bridge-brave</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.micrometer</groupId>
+            <artifactId>micrometer-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.micrometer</groupId>
+            <artifactId>micrometer-registry-prometheus</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.zalando</groupId>
+            <artifactId>logbook-spring-boot-starter</artifactId>
+            <version>3.9.0</version>
+        </dependency>
+        <dependency>
+            <groupId>net.logstash.logback</groupId>
+            <artifactId>logstash-logback-encoder</artifactId>
+            <version>7.2</version>
+        </dependency>
+    </dependencies>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>2023.0.3</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <distributionManagement>
+        <repository>
+            <id>nx-adt-releases</id>
+            <url>https://nx.alfastrah.ru/repository/adt-releases</url>
+        </repository>
+        <snapshotRepository>
+            <uniqueVersion>true</uniqueVersion>
+            <id>nx-adt-snapshots</id>
+            <url>https://nx.alfastrah.ru/repository/adt-snapshots</url>
+        </snapshotRepository>
+    </distributionManagement>
+</project>
