@@ -1,0 +1,7 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-schema-partners_interaction
+      author: IaroshenkoAIu
+      changes:
+        - sql:
+            sql: CREATE SCHEMA IF NOT EXISTS partners_interaction

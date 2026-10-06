@@ -1,0 +1,129 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<wsdl:definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+                  xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+                  xmlns:tns="http://alfastrah.ru/interplat4/partners/interaction/"
+                  xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+                  xmlns:ns1="http://schemas.xmlsoap.org/soap/http"
+                  name="PartnersPortTypeService"
+                  targetNamespace="http://alfastrah.ru/interplat4/partners/interaction/">
+    <wsdl:types>
+        <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+                   xmlns:tns="http://alfastrah.ru/interplat4/partners/interaction/"
+                   targetNamespace="http://alfastrah.ru/interplat4/partners/interaction/" version="1.0">
+
+            <xs:element name="UPIDRequest" type="tns:UPIDRequest"/>
+
+            <xs:element name="UPIDResponse" type="tns:UPIDResponse"/>
+
+            <xs:element name="UPIDSoapFault" type="tns:UPIDSoapFault"/>
+
+            <xs:element name="getPayedContractRequest" type="tns:PayedContractRequest"/>
+
+            <xs:element name="getPayedContractResponse" type="tns:PayedContractResponse"/>
+
+            <xs:complexType name="UPIDRequest">
+                <xs:sequence>
+                    <xs:element name="callerCode" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+
+            <xs:complexType name="UPIDResponse">
+                <xs:sequence>
+                    <xs:element name="UPID" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+
+            <xs:complexType name="UPIDSoapFault">
+                <xs:sequence>
+                    <xs:element name="errorCode" type="xs:string"/>
+                    <xs:element name="errorString" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+
+            <xs:complexType name="PayedContractRequest">
+                <xs:sequence>
+                    <xs:element name="UPID" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+
+            <xs:complexType name="PayedContractResponse">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="contractId" type="xs:integer"/>
+                    <xs:element minOccurs="0" name="code" type="xs:integer"/>
+                    <xs:element minOccurs="0" name="message" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+
+        </xs:schema>
+    </wsdl:types>
+    <wsdl:message name="getUPIDResponse">
+        <wsdl:part element="tns:UPIDResponse" name="parameters">
+        </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="getContractId">
+        <wsdl:part element="tns:getPayedContractRequest" name="parameters">
+        </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="getContractIdResponse">
+        <wsdl:part element="tns:getPayedContractResponse" name="parameters">
+        </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="getUPID">
+        <wsdl:part element="tns:UPIDRequest" name="parameters">
+        </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="UPIDSoapException">
+        <wsdl:part element="tns:UPIDSoapFault" name="UPIDSoapException">
+        </wsdl:part>
+    </wsdl:message>
+    <wsdl:portType name="partnersPortType">
+        <wsdl:operation name="getUPID">
+            <wsdl:input message="tns:getUPID" name="getUPID">
+            </wsdl:input>
+            <wsdl:output message="tns:getUPIDResponse" name="getUPIDResponse">
+            </wsdl:output>
+            <wsdl:fault message="tns:UPIDSoapException" name="UPIDSoapException">
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="getContractId">
+            <wsdl:input message="tns:getContractId" name="getContractId">
+            </wsdl:input>
+            <wsdl:output message="tns:getContractIdResponse" name="getContractIdResponse">
+            </wsdl:output>
+            <wsdl:fault message="tns:UPIDSoapException" name="UPIDSoapException">
+            </wsdl:fault>
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:binding name="PartnersPortTypeServiceSoapBinding" type="tns:partnersPortType">
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <wsdl:operation name="getUPID">
+            <soap:operation soapAction="" style="document"/>
+            <wsdl:input name="getUPID">
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="getUPIDResponse">
+                <soap:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="UPIDSoapException">
+                <soap:fault name="UPIDSoapException" use="literal"/>
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="getContractId">
+            <soap:operation soapAction="" style="document"/>
+            <wsdl:input name="getContractId">
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="getContractIdResponse">
+                <soap:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="UPIDSoapException">
+                <soap:fault name="UPIDSoapException" use="literal"/>
+            </wsdl:fault>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:service name="PartnersPortTypeService">
+        <wsdl:port binding="tns:PartnersPortTypeServiceSoapBinding" name="partnersPortTypePort">
+            <soap:address location="http://z14-1448-j8.vesta.ru:8181/cxf/PartnersInteraction"/>
+        </wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>

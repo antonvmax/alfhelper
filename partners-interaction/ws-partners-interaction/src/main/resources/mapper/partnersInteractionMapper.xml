@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="ru.alfastrah.site.avto.ws.partners.interaction.dlo.PartnersMapper">
+
+    <update id="saveUPID" parameterType="ru.alfastrah.site.avto.ws.partners.interaction.parameters.SaveUPIDParameters"
+            statementType="CALLABLE">
+        { call partners_pak.p_save_upid(#{UPID}, #{callerCode}) }
+    </update>
+
+    <parameterMap id="params" type="java.util.Map">
+        <parameter property="p_upid" jdbcType="VARCHAR" javaType="java.lang.String" mode="IN" />
+        <parameter property="p_contract_id" jdbcType="DECIMAL" javaType="java.math.BigInteger" mode="OUT" />
+        <parameter property="p_code" jdbcType="DECIMAL" javaType="java.math.BigInteger" mode="OUT" />
+        <parameter property="p_message" jdbcType="VARCHAR" javaType="java.lang.String" mode="OUT"/>
+    </parameterMap>
+
+    <select id="getContractId" parameterMap="params" statementType="CALLABLE">
+        { call partners_pak.p_get_contract_id(?, ?, ?, ?) }
+    </select>
+
+    <parameterMap id="linkActionToUpidParams" type="java.util.Map">
+        <parameter property="p_upid" jdbcType="VARCHAR" javaType="java.lang.String" mode="IN" />
+        <parameter property="p_calc_id" jdbcType="VARCHAR" javaType="java.lang.String" mode="IN" />
+        <parameter property="p_contract_id" jdbcType="DECIMAL" javaType="java.lang.Long" mode="IN" />
+    </parameterMap>
+
+    <update id="linkActionToUpid" parameterMap="linkActionToUpidParams" statementType="CALLABLE">
+        { call partners_pak.p_link_action_to_upid(?, ?, ?) }
+    </update>
+
+    <parameterMap id="searchByUpidAndContractIdParams" type="java.util.Map">
+        <parameter property="p_upid" jdbcType="VARCHAR" javaType="java.lang.String" mode="IN" />
+        <parameter property="p_contract_id" jdbcType="DECIMAL" javaType="java.lang.Long" mode="IN" />
+    </parameterMap>
+
+    <select id="searchByUpidAndContractId" parameterMap="searchByUpidAndContractIdParams">
+        SELECT contract_id
+        FROM INTERPLAT.PARTNER_CALCULATION
+        WHERE upid = #{p_upid} AND contract_id = #{p_contract_id}
+    </select>
+</mapper>

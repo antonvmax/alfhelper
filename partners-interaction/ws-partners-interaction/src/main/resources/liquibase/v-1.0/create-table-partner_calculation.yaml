@@ -1,0 +1,58 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-table-partner_calculation
+      author: IaroshenkoAIu
+      changes:
+        - createTable:
+            schemaName: partners_interaction
+            tableName: partner_calculation
+            columns:
+              - column:
+                  name: calculation_id
+                  type: BIGSERIAL
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: date_insert
+                  type: TIMESTAMP
+                  defaultValueComputed: CURRENT_TIMESTAMP
+              - column:
+                  name: upid
+                  type: UUID
+              - column:
+                  name: contract_id
+                  type: BIGINT
+              - column:
+                  name: calc_id
+                  type: VARCHAR
+                  constraints:
+                    nullable: false
+        - createIndex:
+            schemaName: partners_interaction
+            tableName: partner_calculation
+            indexName: idx_partner_calculation_upid
+            columns:
+              - column:
+                  name: upid
+        - createIndex:
+            schemaName: partners_interaction
+            tableName: partner_calculation
+            indexName: idx_partner_calculation_calc_id
+            columns:
+              - column:
+                  name: calc_id
+        - createIndex:
+            schemaName: partners_interaction
+            tableName: partner_calculation
+            indexName: idx_partner_calculation_contract_id
+            columns:
+              - column:
+                  name: contract_id
+        - createIndex:
+            schemaName: partners_interaction
+            tableName: partner_calculation
+            indexName: idx_partner_calculation_date
+            columns:
+              - column:
+                  name: date_insert

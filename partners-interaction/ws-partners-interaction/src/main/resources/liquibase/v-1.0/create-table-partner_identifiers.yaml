@@ -1,0 +1,36 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-table-partner_identifiers
+      author: IaroshenkoAIu
+      changes:
+        - createTable:
+            schemaName: partners_interaction
+            tableName: partner_identifiers
+            columns:
+              - column:
+                  name: upid
+                  type: UUID
+                  constraints:
+                    nullable: false
+              - column:
+                  name: date_insert
+                  type: TIMESTAMP
+                  defaultValueComputed: CURRENT_TIMESTAMP
+              - column:
+                  name: caller_code
+                  type: VARCHAR
+        - createIndex:
+            schemaName: partners_interaction
+            tableName: partner_identifiers
+            indexName: idx_partner_identifiers_upid
+            unique: true
+            columns:
+              - column:
+                  name: upid
+        - createIndex:
+            schemaName: partners_interaction
+            tableName: partner_identifiers
+            indexName: idx_partner_identifiers_date
+            columns:
+              - column:
+                  name: date_insert

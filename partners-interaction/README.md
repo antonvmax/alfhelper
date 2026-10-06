@@ -1,0 +1,1 @@
+# ws-partners-interaction
