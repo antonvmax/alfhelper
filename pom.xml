@@ -30,6 +30,7 @@
 	<modules>
 		<module>main</module>
 		<module>mod1</module>
+		<module>internet-contract</module>
 		<module>payment-cheque</module>
 	</modules>
 	<properties>
