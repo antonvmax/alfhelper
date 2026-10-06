@@ -1,0 +1,39 @@
+variables:
+  # МЕНЯЮТСЯ ОТ ПРОЕКТА К ПРОЕКТУ
+  PROJECT_NAME: ${CI_PROJECT_NAME}
+  CHART_NAME: ${PROJECT_NAME}
+  WS_PATH: ./ws-contract-signed/target     # Path to built .jar
+  DOCKERPORT: "8080"                      # Container port
+  REQCPU: "40m"                              # CPU Reguest 500 millicpus=0.5 CPU
+  REQMEM: "1024M"                          # RAM Request
+  LIMCPU: ""                              # CPU Limit 500m=0.5 CPU
+  LIMMEM: "2048M"                         # RAM Limit
+  DOCKERFILE: Dockerfile-java17-certs
+  INGRESS_ENABLED_DEV: "true"
+  INGRESS_ENABLED_TST: "true"
+  INGRESS_ENABLED_PRD: "true"
+  REPLICA_DEV: 2
+  REPLICA_TST: 2
+  REPLICA_PRD: 4
+
+  # МЕНЯЮТСЯ РЕДКО
+  READENABLE: "yes"                       # Enable readiness checks "" -- DISABLE  "yes" Enable
+  READINIT: "120"                         # Readiness init delay sec. How long to wait before sending a probe after a container starts.
+  READPER: "30"                           # Readiness period sec. How often a probe will be sent.
+  READTIM: "3"                            # Readiness timeoutSeconds. How long a request can take to respond before it’s considered a failure.
+  LIVENABLE: "yes"                        # Enable liveness checks "" -- DISABLE  "yes" Enable
+  LIVINIT:  "100"                         # Liveness init delay sec. For liveness probes this should be safely longer than the time your app usually takes to start up.
+  LIVPER: "30"                            # Liveness period sec. How often a probe will be sent.
+  LIVTIM: "3"                             # Liveness timeoutSeconds. How long a request can take to respond before it’s considered a failure.
+  RESENABLE: "yes"                        # Enable resources limits "" -- DISABLE
+  JOPTSDEV: "-XX:InitialRAMPercentage=50.0 -XX:MaxRAMPercentage=70.0 -XX:ActiveProcessorCount=1"           # JAVA run options DEVELOP environment
+  JOPTSTST: "-XX:InitialRAMPercentage=50.0 -XX:MaxRAMPercentage=70.0 -XX:ActiveProcessorCount=1"           # JAVA run options TEST environment
+  JOPTSPRD: "-XX:InitialRAMPercentage=50.0 -XX:MaxRAMPercentage=70.0 -XX:ActiveProcessorCount=1"           # JAVA run options PRODUCTION environment
+  SERVICE_MONITOR: "true"
+  JAVA_HOME: "/opt/java/jdk-17"
+
+
+include:
+  - project: 'adt-avto/gitlab-ci-templates'
+    ref: restructure
+    file: '.gitlab-ci.yml'

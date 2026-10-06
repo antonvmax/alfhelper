@@ -32,6 +32,7 @@
 		<module>mod1</module>
 		<module>internet-contract</module>
 		<module>payment-cheque</module>
+		<module>contract-signed</module>
 	</modules>
 	<properties>
 		<java.version>21</java.version>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bindings xmlns="http://java.sun.com/xml/ns/jaxws" xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+		http://schemas.xmlsoap.org/wsdl/ http://schemas.xmlsoap.org/wsdl/
+		http://www.w3.org/2001/XMLSchema http://www.w3.org/2001/XMLSchema.xsd
+		http://java.sun.com/xml/ns/jaxws http://java.sun.com/xml/ns/jaxws/wsdl_customizationschema_2_0.xsd"
+	wsdlLocation="print-form.wsdl">
+
+	<bindings node="wsdl:definitions/wsdl:portType[@name='PrintFormPortType']">
+		<package name="ru.alfastrah.interplat4.model.print.form" />
+		<class name="PrintedFormPort" />
+	</bindings>
+
+	<bindings node="wsdl:definitions/wsdl:service[@name='PrintedForms']">
+		<package name="ru.alfastrah.interplat4.model.print.form" />
+		<class name="PrintedFormService" />
+	</bindings>
+
+</bindings>
