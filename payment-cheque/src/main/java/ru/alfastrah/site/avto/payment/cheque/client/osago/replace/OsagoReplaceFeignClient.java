@@ -4,7 +4,7 @@ import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import ru.alfastrah.alfadigital.RealContractResponse;
+import ru.alfastrah.site.avto.payment.cheque.model.osago.replace.RealContractResponse;
 
 @FeignClient(name="osago-replace", url = "#{environment.acceptsProfiles('default', 'dev') ? 'http://ms-adt-inner.vesta.ru' : 'http://ms-osago-replace:8480'}")
 public interface OsagoReplaceFeignClient {

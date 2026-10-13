@@ -3,7 +3,7 @@ package ru.alfastrah.site.avto.payment.cheque.service;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-import ru.alfastrah.alfadigital.RealContractResponse;
+import ru.alfastrah.site.avto.payment.cheque.model.osago.replace.RealContractResponse;
 import ru.alfastrah.site.avto.payment.cheque.client.osago.replace.OsagoReplaceFeignClient;
 import ru.alfastrah.site.avto.payment.cheque.exception.ReceivingChequeException;
 
